@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="regist">
+    <select id="getAdminData">
+        SELECT
+            id
+        FROM
+            admins
+        WHERE
+            admin_email = #{adminEmail}
+    </select>
+    <insert id="setNewAdminData">
+        INSERT INTO
+            admins
+        (
+            admin_email,
+            admin_password,
+            admin_salt,
+            admin_name
+        )
+        VALUES
+        (
+            #{adminEmail},
+            #{adminPassword},
+            #{adminSalt},
+            #{adminName}
+        )
+    </insert>
+</mapper>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="add">
+    <select id="getGoodId">
+        SELECT
+            id
+        FROM
+            goods
+        WHERE
+        (
+            good_nation_code = #{nationCode}
+        AND
+            good_company_code = #{companyCode}
+        AND
+            good_good_code = #{goodCode}
+        AND
+            good_check_digit = #{checkDigit}
+        )
+    </select>
+    <insert id="setCartData">
+        INSERT INTO
+            carts
+            (
+                user_id,
+                good_id
+            )
+        VALUES
+        (
+            #{userId},
+            #{goodId}
+        )
+    </insert>
+</mapper>

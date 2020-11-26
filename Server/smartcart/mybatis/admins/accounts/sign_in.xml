@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sign_in">
+    <select id="getAdminPassword">
+        SELECT
+            id,
+            admin_salt,
+            admin_password,
+            admin_name
+        FROM
+            admins
+        WHERE
+            admin_email = #{adminEmail}
+    </select>
+    <update id="setAdminToken">
+        UPDATE
+            admins
+        SET
+            admin_jwt_token = #{adminJWTToken}
+        WHERE
+            id = #{id}
+    </update>
+</mapper>

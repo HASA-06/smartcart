@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reissue">
+    <select id="getUserId">
+        SELECT
+            id
+        FROM
+            users
+        WHERE
+            user_jwt_token = #{userJWTToken}
+    </select>
+    <update id="setUserToken">
+        UPDATE
+            users
+        SET
+            user_jwt_token = #{userJWTToken}
+        WHERE
+            id = #{id}
+    </update>
+</mapper>

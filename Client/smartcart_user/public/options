@@ -1,0 +1,22 @@
+색상
+
+Main Color : #3C0269
+Sub Color : #6103A8
+Hover Color : #2D024F
+
+비율
+400px 기준
+
+style set
+
+<style lang="scss" scoped>
+
+
+@media ( min-width : 768px ) {
+
+}
+
+@media ( min-width : 1024px ) {
+
+}
+</style>

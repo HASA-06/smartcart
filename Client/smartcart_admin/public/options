@@ -1,0 +1,48 @@
+Main Color : #3C0269
+Sub Color : #6103A8
+Server error text : 
+console.log('Server error, please ask to developer');
+alert('Server error, please ask to developer');
+
+token expired text : 
+if(error.response.data.title == 'Check token fail') {
+    var headerConfig = {
+        headers : {
+            token : this.$store.state.adminToken
+        }
+    };
+
+    this.$axios.post(this.$store.state.host + this.$store.state.urls.adminsTokensReissue, null, headerConfig)
+    .then(res => {
+        if(res.status == 201) {
+            if(this.$cookie.get('signInMaintenance') == 'N') {
+                var storage = window.sessionStorage;
+                storage.setItem('adminToken', res.data.data);
+                this.$store.commit('setToken', {adminToken : res.data.data, adminEmail : storage.getItem('adminEmail'), adminName : storage.getItem('adminName')});
+                alert('토큰이 만료되었습니다. 다시 시도해보세요.');
+                if(this.$route.name != 'GoodAdd') {
+                    this.$router.push({
+                        name : 'GoodAdd'
+                    });
+                }
+            } else if(this.$cookie.get('signInMaintenance') == 'Y') {
+                var storage = window.localStorage;
+                storage.setItem('adminToken', res.data.data);
+                this.$store.commit('setToken', {adminToken : res.data.data, adminEmail : storage.getItem('adminEmail'), adminName : storage.getItem('adminName')});
+                alert('토큰이 만료되었습니다. 다시 시도해보세요.');
+                if(this.$route.name != 'GoodAdd') {
+                    this.$router.push({
+                        name : 'GoodAdd'
+                    });
+                }
+            }
+        }
+    })
+    .catch(err => {
+        if(err) {
+            this.$cookie.set('signInMaintenance', '');
+            console.log('Server error, please ask to developer');
+            alert('Server error, please ask to developer');
+        }
+    });
+}

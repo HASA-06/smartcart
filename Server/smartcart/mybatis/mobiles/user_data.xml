@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user_data">
+    <select id="getUserDataById">
+        SELECT
+            user_email as userEmail,
+            user_name as userName,
+            user_phone_number as userPhoneNumber,
+            user_point as userPoint,
+            user_jwt_token as userJWTToken
+        FROM
+            users
+        WHERE
+            id = #{userId}
+    </select>
+</mapper>

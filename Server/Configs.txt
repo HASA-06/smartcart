@@ -1,0 +1,19 @@
+Server (Amazon EC2 / Seoul)
+
+Name: smartcartserver
+
+PPK File Directory: ../smart_cart_server_key.ppk
+PPK File Password: smartcart
+
+Database (Amazon RDS / Seoul)
+
+Name: smartcartdatabase
+Schema: smartcart_database
+
+Master UserName: one_of_us
+Master Password: one_of_us_smart_cart
+
+S3
+
+AccessKey : AKIAT7VQTPMOZAF4J4V4
+SecretKey : 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

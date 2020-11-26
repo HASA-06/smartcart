@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="apply">
+    <insert id="setPaymentsDatas">
+        INSERT INTO
+            payments
+            (
+                user_id,
+                receipt_id,
+                total_price
+            )
+        VALUES
+        (
+            #{userId},
+            #{receiptId},
+            #{totalPrice}
+        )
+    </insert>
+    <update id="setGoodCountForPayment">
+        UPDATE 
+            goods
+        SET 
+            good_count = CASE
+            <foreach collection="goodDatas" item="good" separator="">
+                when id = #{good.goodId} then good_count - #{good.goodCount}
+            </foreach>
+            END
+    </update>
+    <select id="getLastPaymentDatasId">
+        SELECT LAST_INSERT_ID()
+    </select>
+    <insert id="setPaymentsDetailDatas">
+        INSERT INTO
+            payments_detail
+            (
+                payment_id,
+                good_id,
+                good_count
+            )
+        VALUES
+        <foreach collection="goodDatas" item="good" separator=" , ">
+            (
+                #{paymentId},
+                #{good.goodId},
+                #{good.goodCount}
+            )
+        </foreach>
+    </insert>
+    <delete id="deleteUserCartData">
+        DELETE FROM 
+            carts
+        WHERE
+            user_id = #{userId}
+    </delete>
+</mapper>

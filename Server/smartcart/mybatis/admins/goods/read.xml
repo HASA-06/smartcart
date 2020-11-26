@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="read">
+    <select id="getAllGoodDatas">
+        SELECT
+            g.id as goodId,
+            g.good_name as goodName,
+            g.good_image_url as goodImageUrl,
+            c.id as companyId,
+            c.company_name as companyName
+        FROM
+            goods as g,
+            companys as c
+        WHERE
+            g.company_id = c.id
+        ORDER BY
+            g.id
+        DESC
+        LIMIT 8
+    </select>
+    <select id="getMoreGoodDatas">
+        SELECT
+            g.id as goodId,
+            g.good_name as goodName,
+            g.good_image_url as goodImageUrl,
+            c.id as companyId,
+            c.company_name as companyName
+        FROM
+            goods as g,
+            companys as c
+        WHERE
+        (
+            #{lastGoodId} > g.id
+        AND
+            g.company_id = c.id
+        )
+        ORDER BY
+            g.id
+        DESC
+        LIMIT 8
+    </select>
+    <select id="getGoodDatasById">
+        SELECT
+            g.id as goodId,
+            g.good_name as goodName,
+            g.good_image_url as goodImageUrl,
+            g.good_image_name as goodImageName,
+            g.good_nation_code as nationCode,
+            g.good_company_code as companyCode,
+            g.good_good_code as goodCode,
+            g.good_check_digit as checkDigit,
+            g.good_sale_status as goodSaleStatus,
+            g.good_price as goodPrice,
+            g.good_count as goodCount,
+            c.id as companyId,
+            c.company_name as companyName,
+            c.company_good_count as companyGoodCount
+        FROM
+            goods as g,
+            companys as c
+        WHERE
+        (
+            g.id = #{goodId}
+        AND
+            g.company_id = c.id
+        )
+    </select>
+</mapper>

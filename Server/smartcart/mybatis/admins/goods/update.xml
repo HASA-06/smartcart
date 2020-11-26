@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="update">
+    <update id="setGoodAndCompanyData">
+        UPDATE
+            companys as c,
+            goods as g
+        SET
+            c.company_name = #{companyName},
+            c.company_nation_code = #{nationCode},
+            c.company_company_code = #{companyCode},
+            g.good_name = #{goodName},
+            g.good_image_url = #{goodImageUrl},
+            g.good_price = #{goodPrice},
+            g.good_sale_status = #{goodSaleStatus},
+            g.good_nation_code = #{nationCode},
+            g.good_company_code = #{companyCode},
+            g.good_good_code = #{goodCode},
+            g.good_check_digit = #{checkDigit}
+        WHERE
+        (
+            g.id = #{goodId}
+        AND
+            g.company_id = c.id
+        )
+    </update>
+</mapper>
